@@ -62,7 +62,14 @@ app.get('/menu', function(req, res) {
     menu: RESTAURANT.menu
   });
 });
-
+app.get('/menu/:category', function(req, res) {
+  const category = req.params.category;
+    const filterMenu = RESTAURANT.menu.filter(item => item.category === category);
+  res.render('category.ejs', {
+    filterMenu: filterMenu,
+    category: category
+  });
+});
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
